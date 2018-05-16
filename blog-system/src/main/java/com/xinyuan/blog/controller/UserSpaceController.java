@@ -67,7 +67,7 @@ public class UserSpaceController {
     public ModelAndView profile(@PathVariable("username") String username, Model model) {
         User user = (User) userDetailsService.loadUserByUsername(username);
         model.addAttribute("user", user);
-        return new ModelAndView("/userspace/profile", "userModel", model);
+        return new ModelAndView("userspace/profile", "userModel", model);
     }
 
     /**
@@ -107,7 +107,7 @@ public class UserSpaceController {
     public ModelAndView avatar(@PathVariable("username") String username, Model model) {
         User user = (User) userDetailsService.loadUserByUsername(username);
         model.addAttribute("user", user);
-        return new ModelAndView("/userspace/avatar", "userModel", model);
+        return new ModelAndView("userspace/avatar", "userModel", model);
     }
 
     @PostMapping("/{username}/avatar")
@@ -161,7 +161,7 @@ public class UserSpaceController {
         model.addAttribute("blogList", list);
         model.addAttribute("catalogId", catalogId);
 
-        return (async ? "/userspace/u :: #mainContainerReplace" : "/userspace/u"); // if async, then only return the main part to replace
+        return (async ? "userspace/u :: #mainContainerReplace" : "userspace/u"); // if async, then only return the main part to replace
     }
 
     /**
@@ -205,7 +205,7 @@ public class UserSpaceController {
         model.addAttribute("isBlogOwner", isBlogOwner);
         model.addAttribute("blogModel", blogService.getBlogById(id));
         model.addAttribute("currentVote", currentVote);
-        return "/userspace/blog";
+        return "userspace/blog";
     }
 
     /**
@@ -242,7 +242,7 @@ public class UserSpaceController {
         List<Catalog> catalogs = catalogService.listCatalogs(user);
         model.addAttribute("blog", new Blog(null, null, null));
         model.addAttribute("catalogs", catalogs);
-        return new ModelAndView("/userspace/blogedit", "blogModel", model);
+        return new ModelAndView("userspace/blogedit", "blogModel", model);
     }
 
     /**
@@ -259,7 +259,7 @@ public class UserSpaceController {
         User user = (User)userDetailsService.loadUserByUsername(username);
         List<Catalog> catalogs = catalogService.listCatalogs(user);
         model.addAttribute("catalogs", catalogs);
-        return new ModelAndView("/userspace/blogedit", "blogModel", model);
+        return new ModelAndView("userspace/blogedit", "blogModel", model);
     }
 
     @PostMapping("/{username}/blogs/edit")

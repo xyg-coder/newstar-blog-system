@@ -56,7 +56,7 @@ public class CommentController {
         model.addAttribute("viewer", viewUsername);
         model.addAttribute("comments", comments);
         model.addAttribute("blog", blog);
-        return "/userspace/blog :: #mainContainerReplace";
+        return "userspace/blog :: #mainContainerReplace";
     }
 
     /**

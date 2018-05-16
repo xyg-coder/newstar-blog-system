@@ -36,17 +36,20 @@
         <tr th:if="${files.size()} eq 0">
             <td colspan="6">No Files！！</td>
         </tr>
-        <tr th:each="file : ${files}">
+        <tr th:each="file : ${files}" class="file-row">
             <td><a th:href="'files/'+${file.id}" th:text="${file.name}" /></td>
             <td th:text="${file.id}" ></td>
             <td th:text="${file.contentType}" ></td>
             <td th:text="${file.size}" ></td>
             <td th:text="${file.uploadDate}" ></td>
             <td th:text="${file.md5}" ></td>
+            <td><button class="deleteButton" th:attr="id=${file.id}">Delete</button></td>
         </tr>
         </tbody>
     </table>
 </div>
 
+<script src="../../js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<script src="../../js/main.js" th:src="@{/js/main.js}"></script>
 </body>
 </html>

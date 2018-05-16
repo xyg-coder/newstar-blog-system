@@ -45,7 +45,7 @@ public class CatalogController {
         model.addAttribute("isCatalogOwner", isOwner);
         model.addAttribute("catalogs", catalogs);
         model.addAttribute("unsortedCatalogName", catalogService.getUnsortedCatalogName());
-        return "/userspace/u :: #catalogReplace";
+        return "userspace/u :: #catalogReplace";
     }
 
     /**
@@ -93,7 +93,7 @@ public class CatalogController {
     public String getCatalogEdit(Model model) {
         Catalog catalog = new Catalog(null, null);
         model.addAttribute("catalog", catalog);
-        return "/userspace/catalogedit";
+        return "userspace/catalogedit";
     }
 
     @GetMapping("/edit/{id}")
@@ -103,6 +103,6 @@ public class CatalogController {
             throw new IllegalArgumentException("Should not edit the default catalog");
         }
         model.addAttribute("catalog", catalog);
-        return "/userspace/catalogedit";
+        return "userspace/catalogedit";
     }
 }
