@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="en"  data-th-fragment="header">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSRF -->
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+
+    <!-- Tether core CSS -->
+    <link href="../../css/tether.min.css" th:href="@{/css/tether.min.css}" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <!--     <link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+          crossorigin="anonymous">
+    <!-- Font-Awesome CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- NProgress CSS -->
+    <link href="../../css/nprogress.css" th:href="@{/css/nprogress.css}" rel="stylesheet">
+
+    <!-- thinker-md CSS -->
+    <link href="../../css/thinker-md.vendor.css" th:href="@{/css/thinker-md.vendor.css}" rel="stylesheet">
+
+    <!-- bootstrap tags CSS -->
+    <link href="../../css/bootstrap-tagsinput.css" th:href="@{/css/jquery.tagsinput.min.css}" rel="stylesheet">
+
+    <!-- bootstrap chosen CSS -->
+    <link href="../../css/component-chosen.min.css" th:href="@{/css/component-chosen.min.css}" rel="stylesheet">
+
+    <!-- toastr CSS -->
+    <link href="../../css/toastr.min.css" th:href="@{/css/toastr.min.css}" rel="stylesheet">
+
+    <!-- this plugin makes the page unable to scroll down -->
+    <!--&lt;!&ndash; jQuery image cropping plugin CSS &ndash;&gt;-->
+    <link rel="stylesheet" th:href="@{/css/cropper.css}">
+
+    <!-- Custom styles -->
+    <link href="../../css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+    <link href="../../css/thymeleaf-bootstrap-paginator.css" th:href="@{/css/thymeleaf-bootstrap-paginator.css}"
+          rel="stylesheet">
+    <link href="../../css/blog-search.css" th:href="@{/css/blog-search.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/emoji/nature.css}">
+    <link rel="stylesheet" th:href="@{/css/emoji/object.css}">
+    <link rel="stylesheet" th:href="@{/css/emoji/people.css}">
+    <link rel="stylesheet" th:href="@{/css/emoji/place.css}">
+    <link rel="stylesheet" th:href="@{/css/emoji/Sysmbols.css}">
+    <link rel="stylesheet" th:href="@{/css/emoji/twemoji.css}">
+</head>
+<body>
+
+<!-- navbar -->
+<nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md">
+    <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarsContainer" aria-controls="navbarsExampleContainer" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/">NewStarBlog</a>
+
+        <div class="collapse navbar-collapse" id="navbarsContainer">
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/blogs?order=new">New <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blogs?order=hot">Hot</a>
+                </li>
+                <div class="form-inline mt-2 mt-md-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" id="indexkeyword">
+                    <a href="javascript:void(0)" class="btn btn-outline-secondary my-2 my-sm-0" id="indexsearch"><i class="fa fa-search"
+                                                                                             aria-hidden="true"></i>
+                    </a>
+                </div>
+
+            </ul>
+
+            <div sec:authorize="isAuthenticated()" class="row">
+                <div class="dropdown">
+                    <a class="dropdown-toggle btn btn-outline-success my-2 my-sm-0" href="/u/waylau" data-toggle="dropdown"><span sec:authentication="name"></span></a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" th:href="@{'/u/' + ${#authentication.name}}">Personal Main Page</a>
+                        <a class="dropdown-item" th:href="'/u/' + ${#authentication.name} + '/profile'">Personal Setting</a>
+                        <a class="dropdown-item" href="/admins" sec:authorize="hasRole('ROLE_ADMIN')">Administrator</a>
+                    </div>
+                </div>
+                <div>
+                    <a class="btn btn-outline-success my-2 my-sm-0" href="/u/xinyuan/blogs/edit"
+                       th:href="@{'/u/' + ${#authentication.name} + '/blogs/edit'}">Write Blog</a>
+                </div>
+                <form action="/logout" th:action="@{/logout}" method="post">
+                    <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Quit">
+                </form>
+            </div>
+
+            <div sec:authorize="isAnonymous()">
+                <a href="/login" class="btn btn-outline-success my-2 my-sm-0">Login</a>
+                <a href="/register" class="btn btn-outline-success my-2 my-sm-0">Register</a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>

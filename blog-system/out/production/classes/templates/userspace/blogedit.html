@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="~{fragments/header :: header}">
+</head>
+<body>
+<!--<style type="text/css">-->
+    <!--@import "/css/emoji/nature.css";-->
+    <!--@import "/css/emoji/object.css";-->
+    <!--@import "/css/emoji/people.css";-->
+    <!--@import "/css/emoji/place.css";-->
+    <!--@import "/css/emoji/Sysmbols.css";-->
+    <!--@import "/css/emoji/twemoji.css";-->
+<!--</style>-->
+
+<!-- page content -->
+<div class="container blog-content-container">
+    <div class="row">
+        <!-- blog entries column -->
+        <div class="col-md-8">
+            <!-- blog post -->
+            <div class="card mb-4">
+                <div class="card-block" th:object="${blogModel.blog}">
+                    <input type="hidden" name="id" id="id" th:value="*{id}">
+                    <input type="text" class="form-control" placeholder="Input the title here" id="title" name="title"
+                    th:value="*{title}" maxlength="50">
+                    <hr>
+                    <textarea name="summary" id="summary" maxlength="300" th:text="*{summary}"
+                              onkeyup="auto_grow(this)"></textarea>
+                    <hr>
+                    <textarea name="content" data-provide="markdown" data-hidden-buttons="cmdImage"
+                              id="md" th:text="*{content}"></textarea>
+                </div>
+            </div>
+        </div>
+
+         <!-- blog right content -->
+        <div class="col-md-4">
+            <!-- menu -->
+            <div class="card">
+                <h5 class="card-header"><i class="fa fa-file-image-o" aria-hidden="true"></i>Upload Image</h5>
+                <div class="card-block">
+                    <div class="row mt-1">
+                        <div class="col-lg-12">
+                            <!-- upload image -->
+                            <form enctype="multipart/form-data" id="uploadformid">
+                                <input type="file" name="file" accept="image/png,image/gif,image/jpeg" id="file">
+                                <button class="btn btn-primary float-right" type="button" id="uploadImage">Insert</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="blog-edit-card">
+                <h5 class="card-header"><i class="fa fa-cog" aria-hidden="true"></i> Edit Blog</h5>
+                <div class="card-block">
+                    <div class="row mt-1">
+                        <div class="col-lg-12">
+                            TAG： 					<input type="text" class="form-control form-control-tag" th:value="${blogModel.blog.tags}">
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-lg-12">
+                            Catalog:
+                            <select id="catalogSelect" class="form-control form-control-chosen" data-placeholder="Please Select">
+                                <option th:value="*{id}" th:text="*{name}" th:each="catalog : ${blogModel.catalogs}" th:object="${catalog}" th:selected="${catalog  eq blogModel.blog.catalog }">Java</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col-lg-12">
+                            <button class="btn btn-primary float-right" id="submitBlog" th:attr="username=${#authentication.name}">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}">...</div>
+<script src="../../js/userspace/blogedit.js" th:src="@{/js/userspace/blogedit.js}"></script>
+</body>
+</html>

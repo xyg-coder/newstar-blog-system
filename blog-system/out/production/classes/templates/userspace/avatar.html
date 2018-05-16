@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="img-container col-md-6">
+        <img id="image" th:src="${userModel.user.avatar} == null ? '/images/avatar-defualt.jpg' : ${userModel.user.avatar}"
+             alt="Picture">
+    </div>
+    <div class="col-md-6" id="crop-preview">
+        <img  id="resultImg" class="blog-avatar blog-avatar-230">
+    </div>
+</div>

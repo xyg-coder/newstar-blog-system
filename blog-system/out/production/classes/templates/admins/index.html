@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="~{fragments/header::header}">
+</head>
+<body>
+
+<div class="container blog-content-container">
+    <div class="row">
+
+        <!-- left column -->
+        <div class="col-md-4 col-xl-3">
+            <div class="card">
+                <h5 class="card-header">
+                    <i class="fa fa-bars" aria-hidden="true"></i> Menu
+                </h5>
+                <ul class="list-group blog-menu" th:each="menu: ${menuList.list}">
+                    <a href="javascript:void(0)" class="list-group-item" th:title="${menu.name}"
+                    th:text="${menu.name}" data-th-attr="url=${menu.url}">User management</a>
+                </ul>
+            </div>
+        </div>
+
+        <!-- right column -->
+        <div class="col-md-8 col-xs-9">
+            <div class="card" id="rightContainer"></div>
+        </div>
+    </div>
+</div>
+
+<footer class="blog-footer bg-inverse fixed-bottom" data-th-fragment="footer">
+    <a id="goToTop" href="#">
+        <i class="fa fa-chevron-up fa-3x" aria-hidden="true"></i>
+    </a>
+    <div class="container">
+        <p class="m-0 text-center text-white">© 2018 <a href="https://waylau.com">Xinyuan Gui</a></p>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../../js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script src="../../js/tether.min.js" th:src="@{/js/tether.min.js}"></script>
+    <script src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../../js/nprogress.js" th:src="@{/js/nprogress.js}"></script>
+    <script src="../../js/thinker-md.vendor.min.js" th:src="@{/js/thinker-md.vendor.min.js}"></script>
+    <script src="../../js/jquery.tag-editor.min.js" th:src="@{/js/jquery.tag-editor.min.js}"></script>
+    <script src="../../js/chosen.jquery.js" th:src="@{/js/chosen.jquery.js}"></script>
+    <script src="../../js/thymeleaf-bootstrap-paginator.js" th:src="@{/js/thymeleaf-bootstrap-paginator.js}"></script>
+    <script src="../../js/catalog-generator.js" th:src="@{/js/catalog-generator.js}"></script>
+    <script src="../../js/toastr.min.js" th:src="@{/js/toastr.min.js}"></script>
+    <script src="../../js/main.js" th:src="@{/js/main.js}"></script>
+    <script src="../../js/admins/main.js" th:src="@{/js/admins/main.js}"></script>
+</footer>
+</body>
+</html>
